@@ -1,0 +1,57 @@
+{
+  "name": "upscalerjs-api-server",
+  "version": "1.0.0",
+  "description": "AI-powered image enhancement APIs using UpscalerJS",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node test/api.upscale.test.js",
+    "docker:build": "docker build -t avinashskaranth/upscalerjs:latest .",
+    "docker:run": "docker-compose up --build",
+    "docker:run:gpu": "docker-compose -f docker-compose.gpu.yml up --build"
+  },
+  "keywords": [
+    "upscalerjs",
+    "tensorflow",
+    "image-enhancement",
+    "api",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.20.0",
+    "@upscalerjs/default-model": "^1.0.0",
+    "@upscalerjs/esrgan-legacy": "^1.0.0",
+    "@upscalerjs/esrgan-medium": "^1.0.0",
+    "@upscalerjs/esrgan-slim": "^1.0.0",
+    "@upscalerjs/esrgan-thick": "^1.0.0",
+    "@upscalerjs/maxim-deblurring": "^0.1.0",
+    "@upscalerjs/maxim-dehazing-indoor": "^0.1.0",
+    "@upscalerjs/maxim-dehazing-outdoor": "^0.1.0",
+    "@upscalerjs/maxim-denoising": "^0.1.0",
+    "@upscalerjs/maxim-deraining": "^0.1.0",
+    "@upscalerjs/maxim-enhancement": "^0.1.0",
+    "@upscalerjs/maxim-retouching": "^0.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "swagger-ui-express": "^5.0.1",
+    "upscaler": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@tensorflow/tfjs-node-gpu": "^4.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

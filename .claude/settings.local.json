@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:upscalerjs.com)",
+      "WebSearch",
+      "WebFetch(domain:context7.com)",
+      "WebFetch(domain:*)",
+      "Bash(npm run *)",
+      "Bash(node *)",
+      "Bash(*)",
+      "mcp__codegraph__codegraph_files",
+      "mcp*"
+    ]
+  }
+}

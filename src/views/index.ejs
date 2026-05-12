@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+
+  <section class="hero">
+    <h1>UpscalerJS Image Enhancement APIs</h1>
+    <p>AI-powered image processing server with GPU/CPU auto-detection. Upload an image or send base64 data via REST API.</p>
+  </section>
+
+  <div class="container">
+    <div class="grid">
+      <%
+      const demoMap = {
+        'upscaling': 'upscaling',
+        'deblurring': 'deblurring',
+        'denoising': 'denoising',
+        'low-light-enhancement': 'enhancement',
+        'retouching': 'retouching',
+        'deraining': 'deraining',
+        'dehazing': 'dehazing'
+      };
+      Object.entries(categories).forEach(([key, cat]) => { %>
+        <div class="card">
+          <h3><%= cat.route.charAt(0).toUpperCase() + cat.route.slice(1) %></h3>
+          <p><%= cat.description %></p>
+          <div class="models">
+            Models:
+            <% cat.models.forEach((m, i) => { %>
+              <%= m.name %><%= i < cat.models.length - 1 ? ', ' : '' %>
+            <% }) %>
+          </div>
+          <a href="/demo/<%= demoMap[key] %>" class="btn btn-primary">Open Demo</a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

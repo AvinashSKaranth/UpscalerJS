@@ -1,0 +1,557 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "UpscalerJS Image Enhancement API",
+    "version": "1.0.0",
+    "description": "AI-powered image enhancement APIs using UpscalerJS and TensorFlow.js"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "Backend status and timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "List available models",
+        "responses": {
+          "200": {
+            "description": "Model registry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upscale": {
+      "post": {
+        "summary": "Upscale an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "scale",
+            "schema": {
+              "type": "string",
+              "enum": ["2x", "3x", "4x", "8x"]
+            },
+            "description": "Scale factor"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deblur": {
+      "post": {
+        "summary": "Deblur an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/denoise": {
+      "post": {
+        "summary": "Denoise an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enhance": {
+      "post": {
+        "summary": "Enhance a low-light image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retouch": {
+      "post": {
+        "summary": "Retouch an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/derain": {
+      "post": {
+        "summary": "Remove rain from an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dehaze": {
+      "post": {
+        "summary": "Remove haze from an image",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Base64Request"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Model ID"
+          },
+          {
+            "in": "query",
+            "name": "output",
+            "schema": {
+              "type": "string",
+              "enum": ["file", "base64"],
+              "default": "file"
+            },
+            "description": "Response format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Processed image",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Base64Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "backend": {
+            "type": "string",
+            "enum": ["cpu", "gpu"]
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "ModelsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "ImageUploadRequest": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Image file"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model ID"
+          },
+          "scale": {
+            "type": "string",
+            "description": "Scale factor (upscaling only)"
+          },
+          "output": {
+            "type": "string",
+            "enum": ["file", "base64"],
+            "description": "Response format"
+          }
+        }
+      },
+      "Base64Request": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "Base64 encoded image (with or without data URI prefix)"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model ID"
+          },
+          "scale": {
+            "type": "string",
+            "description": "Scale factor (upscaling only)"
+          },
+          "output": {
+            "type": "string",
+            "enum": ["file", "base64"],
+            "description": "Response format"
+          }
+        }
+      },
+      "Base64Response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string",
+            "description": "Base64 encoded PNG with data URI prefix"
+          },
+          "encoding": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
